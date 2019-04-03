@@ -1,0 +1,52 @@
+.container {
+  max-width: 960px;
+  width: 100%;
+  margin: auto;
+}
+
+.header {
+  padding: 20px 0;
+
+  .container {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+.footer {
+  padding: 20px 0;
+
+  .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    p {
+      font-size: 1.1rem;
+    }
+  }
+}
+
+.row {
+  display: flex;
+  margin: 0 -10px;
+
+  &.row-radio {
+    input {
+      position: relative;
+      top: 3px;
+      margin-left: 3px;
+    }
+  }
+}
+
+.col {
+  padding: 0 10px;
+}
+
+@for $i from 1 through 12 {
+  .col#{$i} {
+    flex-basis: percentage(($i / 12));
+    max-width: percentage(($i / 12));
+  }
+}

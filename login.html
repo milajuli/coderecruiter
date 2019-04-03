@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>coderecruiter</title>
+  <link rel="stylesheet" href="./dist/assets/styles/login.css">
+</head>
+
+<body class="page-login">
+  <div class="wrapper">
+    <header class="header">
+      <div class="container">
+        <a class="header-logo" href="#">
+          <img src="./dist/assets/images/logo.png" alt="">
+        </a>
+      </div>
+    </header>
+    <main class="main">
+      <div class="container">
+        <div class="form">
+          <div class="form-title">
+            <h1>Login</h1>
+            <h2>
+              Bienvenido!
+              <span>Por favor ingresa tus datos</span>
+            </h2>
+          </div>
+          <div class="form-controls">
+            <form>
+              <div class="form-row">
+                <label>Correo</label>
+                <input required class="js_email form-input" type="email">
+              </div>
+              <div class="form-row">
+                <label>Password</label>
+                <input required class="js_password form-input" type="password">
+              </div>
+              <div class="form-row form-row-flex">
+                <div class="form-col-left">
+                  <div class="form-flex">
+                    <input id="remember" type="checkbox">
+                    <label for="remember">Recordar</label>
+                  </div>
+                </div>
+                <div class="form-col-right">
+                  <a class="color-primary" href="">Olvidaste tu contraseña?</a>
+                </div>
+              </div>
+              <div class="form-row">
+                <button type="submit" class="button button-primary">Login</button>
+              </div>
+            </form>
+            <div class="form-row form-row-footer">
+              <p>No tienes una cuenta?
+                <a class="color-primary" href="register.html">Registrate aqui</a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer class="footer">
+      <div class="container">
+        <p>Todos los derechos reservados | 2019</p>
+        <a href="" class="logo">
+          <img width="80" height="19" src="./dist/assets/images/logo.png" alt="">
+        </a>
+      </div>
+    </footer>
+  </div>
+  <script src="https://www.gstatic.com/firebasejs/5.9.2/firebase.js"></script>
+  <script src="./dist/assets/scripts/firebaseKey.js"></script>
+  <script>
+    function getValues() {
+      let email = document.querySelector('.js_email').value,
+        password = document.querySelector('.js_password').value;
+
+      return {
+        email,
+        password
+      }
+    }
+
+    function initAuth(e) {
+      e.preventDefault();
+
+      const infoUser = getValues();
+      firebase.auth().signInWithEmailAndPassword(infoUser.email, infoUser.password)
+        .catch(function (error) {
+          // Handle Errors here.
+          //  console.log('error!!!')
+          alert("Error " + error.message)
+          var errorCode = error.code;
+          var errorMessage = error.message;
+          // ...
+        });
+    };
+
+    function watchAuth() {
+      firebase.auth().onAuthStateChanged(function (user) {
+        if (user) {
+          // User is signed in.
+          console.log('esta logueado', user);
+        } else {
+          // No user is signed in.
+          console.log('esta deslogueado');
+        }
+      });
+    }
+
+    function init() {
+      watchAuth();
+      // FIRE EVENT
+      document.querySelector('form').addEventListener('submit', initAuth);
+    }
+
+    init();
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,42 @@
+html {
+  font-size: $font-base-size;
+}
+
+body {
+  font-size: $font-body-size;
+  color: $color-text;
+  font-family: $font-global;
+
+  &.is-loading {
+    &:after {
+      content: "Cargando Información...";
+      position: absolute;
+      top: 0;
+      left: 0;
+      color: black;
+      font-weight: bold;
+      background: rgba(0, 0, 0, 0.6);
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+    }
+  }
+}
+
+input:focus,
+a:hover,
+a {
+  outline: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
